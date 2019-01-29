@@ -1,0 +1,2 @@
+# itrysqlite
+пробую sqlite
