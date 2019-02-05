@@ -12,6 +12,15 @@ def insert_Inventory(inv):
         print (e)
     cursor.close()
 
+def delete_Inventory(inv):
+    cursor=connect.cursor()
+    try:
+        cursor.execute("""delete from computers where Inventory = ?""", (inv))
+        connect.commit()
+    except sqlite3.Error as e:
+        print (e)
+    cursor.close()    
+
 def update_User(inv, user):
     cursor=connect.cursor()
     try:
@@ -38,6 +47,16 @@ def update_CompName(inv, compname):
     except sqlite3.Error as e:
         print (e)
     cursor.close()
+
+def output(field, question):
+    cursor=connect.cursor()
+    try:
+        cursor.execute("""select * from computers where ? = ?""", (field, question))
+        answer = cursor.fetchall()
+    except sqlite3.Error as e:
+        print (e)
+    cursor.close()
+    return answer
 
 connect=sqlite3.connect("mydb.sqlite")
 
